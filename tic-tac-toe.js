@@ -9,13 +9,12 @@ function grid() {
         boxes[i].setAttribute("class","square");
         boxes[i].setAttribute("onClick","place()");
         boxes[i].setAttribute("onmouseover","hoverStyle()");
-        boxes[i].setAttribute("onmouseout","hoverOff()");
-        //boxes[i].setAttribute("onClick","winner()");
-        
+        boxes[i].setAttribute("onmouseout","hoverOff()");        
         
     }
     
-//    winner();
+    let butn = document.getElementsByTagName("button");
+    butn[0].addEventListener("click", restart);
 }
 
 window.onload=grid;
@@ -117,13 +116,11 @@ function whichWin() {
     //checking who won
     if(x_o%2==0) {
         
-        stat.innerHTML = " ";
         stat.innerHTML = "Congratulations! X is the Winner!";
         stat.classList.add("you-won");
     }
     else if(x_o%2==1) {
         
-        stat.innerHTML = " ";
         stat.innerHTML = "Congratulations! O is the Winner!";
         stat.classList.add("you-won");
     }
@@ -176,3 +173,30 @@ function winner() {
     }
     
 }
+
+
+//restart the game function
+function restart() {
+    
+    //restart counter
+    x_o = 0;
+    
+    //restart boxes
+    let boxDem = window.document.getElementById("board").children;
+    
+    for(var i=0;i<boxDem.length;i++) {
+        
+        boxDem[i].innerHTML = "";
+        boxDem[i].setAttribute("onClick", "place()");
+        boxDem[i].classList.remove("X");
+        boxDem[i].classList.remove("O");
+    }
+    
+    //restart status area
+    let stat = document.getElementById("status");
+    stat.classList.remove("you-won");
+    stat.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+    
+}
+
+//**GAME END CODE**//
